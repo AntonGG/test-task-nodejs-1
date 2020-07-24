@@ -29,9 +29,10 @@ const invalidSetHeroStats = async () => {
   });
   const json = await resp.json();
   if (!json.status) {
-    console.log(json);
+    console.log("Ошибка: ", json);
   }
   expect(json.status).toBe(false);
+
 };
 
 const setHeroStats = async () => {
@@ -88,7 +89,7 @@ const invalidUploadHeroImage = async () => {
   });
   const json = await resp.json();
   if (!json.status) {
-    console.log(json);
+    console.log("Ошибка: ", json);
   }
   expect(json.status).toBe(false);
 };
@@ -105,11 +106,13 @@ const getHeroImage = async () => {
 };
 
 describe("User route tests", () => {
-  test("POST invalidSetHeroStat", async () => await invalidSetHeroStats());
   test("POST setHeroStat", async () => await setHeroStats());
   test("GET getHeroStat", async () => await getHeroStats());
   test("POST uploadHeroImage", async () => await uploadHeroImage());
+  test("GET getHeroImage", async () => await getHeroImage());
+
+  //Тесты с заведомо неверными параметрами
+  test("POST invalidSetHeroStat", async () => await invalidSetHeroStats());
   test("POST invalidUploadHeroImage", async () =>
     await invalidUploadHeroImage());
-  test("GET getHeroImage", async () => await getHeroImage());
 });
